@@ -1,0 +1,34 @@
+Public Sub sendEMailThroughOUTLOOK()
+    Try
+        ' Create the Outlook application.
+        Dim oApp As New Outlook.Application()
+        ' Create a new mail item.
+        Dim oMsg As Outlook.MailItem = DirectCast(oApp.CreateItem(Outlook.OlItemType.olMailItem), Outlook.MailItem)
+        ' Set HTMLBody.
+        'add the body of the email
+        oMsg.HTMLBody = "Hello, Jawed your message body will go here!!"
+        'Add an attachment.
+        Dim sDisplayName As [String] = "MyAttachment"
+        Dim iPosition As Integer = CInt(oMsg.Body.Length) + 1
+        Dim iAttachType As Integer = CInt(Outlook.OlAttachmentType.olByValue)
+        'now attached the file
+        Dim oAttach As Outlook.Attachment = oMsg.Attachments.Add("C:\\fileName.jpg", iAttachType, iPosition, sDisplayName)
+        'Subject line
+        oMsg.Subject = "Your Subject will go here."
+        ' Add a recipient.
+        Dim oRecips As Outlook.Recipients = DirectCast(oMsg.Recipients, Outlook.Recipients)
+        ' Change the recipient in the next line if necessary.
+        Dim oRecip As Outlook.Recipient = DirectCast(oRecips.Add("jawed.ace@gmail.com"), Outlook.Recipient)
+        oRecip.Resolve()
+        ' Send.
+        oMsg.Send()
+        ' Clean up.
+        oRecip = Nothing
+        oRecips = Nothing
+        oMsg = Nothing
+        oApp = Nothing
+    'end of try block
+    Catch ex As Exception
+    End Try
+    'end of catch
+End Sub

@@ -1,0 +1,51 @@
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.vbprojAssemblyReference.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.vbproj.GenerateResource.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.vbproj.CoreCompileInputs.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\bin\Debug\Microsoft.VisualStudio.OLE.Interop.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\bin\Debug\System.Data.SqlClient.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\bin\Debug\System.Data.SqlClient.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.vbproj.CopyComplete
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.Form1.resources
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.Resources.resources
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\bin\Debug\OffLineLender2.exe.config
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\bin\Debug\OffLineLender2.exe
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\bin\Debug\OffLineLender2.pdb
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\bin\Debug\OffLineLender2.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.exe
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\obj\Debug\OffLineLender2.pdb
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\bin\Debug\OffLineLender2.exe.config
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\bin\Debug\OffLineLender2.exe
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\bin\Debug\OffLineLender2.pdb
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\bin\Debug\OffLineLender2.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\bin\Debug\Microsoft.VisualStudio.OLE.Interop.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\bin\Debug\System.Data.SqlClient.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\bin\Debug\System.Data.SqlClient.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.vbprojAssemblyReference.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.Form1.resources
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.Resources.resources
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.vbproj.GenerateResource.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.vbproj.CoreCompileInputs.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.vbproj.CopyComplete
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.exe
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderNew2 - Copy\obj\Debug\OffLineLender2.pdb
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\bin\Debug\OffLineLender2.exe.config
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\bin\Debug\OffLineLender2.exe
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\bin\Debug\OffLineLender2.pdb
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\bin\Debug\OffLineLender2.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\bin\Debug\Microsoft.VisualStudio.OLE.Interop.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\bin\Debug\System.Data.SqlClient.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\bin\Debug\System.Security.Cryptography.Encoding.dll
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\bin\Debug\System.Data.SqlClient.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.vbprojAssemblyReference.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.Form1.resources
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.Resources.resources
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.vbproj.GenerateResource.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.vbproj.CoreCompileInputs.cache
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.vbproj.CopyComplete
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.exe
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.xml
+C:\Users\Jeremy Kynoch\source\repos\OffLineLenderSQL\obj\Debug\OffLineLender2.pdb
