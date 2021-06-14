@@ -1,11 +1,11 @@
 ﻿################################################################################
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
-/.vs/Mandates
-/.vs/Mandates/
-/.vs/Mandates/v15/Server/sqlite3/db.lock
+/.vs/OffLineLender2
+/.vs/OffLineLender2/
+/.vs/OffLineLender2/v15/Server/sqlite3/db.lock
 /obj/Release
-/.vs/Mandates/v16/Server/sqlite3
-/.vs/Mandates/v16
+/.vs/OffLineLender2/v16/Server/sqlite3
+/.vs/OffLineLender2/v16
 .vs/
 *.suo

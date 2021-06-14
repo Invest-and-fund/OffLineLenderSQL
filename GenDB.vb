@@ -2457,4 +2457,44 @@ Public Class GenDB
 
         getInterestBought = i
     End Function
+    Public Function GetServerName() As String
+        Dim s, strConn As String
+
+        strConn = System.Configuration.ConfigurationManager.ConnectionStrings("SQLConnectionString").ConnectionString 'System.Configuration.ConfigurationManager.ConnectionStrings("FBConnectionString").ConnectionString.ToUpper
+
+        s = ""
+        If strConn.ToLower.Contains("testing") Then
+            s = "Testing Server"
+        End If
+
+        If s = "" Then
+            If strConn.ToLower.Contains("dev") Then
+                s = "Dev Server"
+            End If
+        End If
+
+        If s = "" Then
+            If strConn.ToLower.Contains("finaltest") Then
+                s = "User Acceptance Server"
+            End If
+        End If
+
+        If s = "" Then
+            If strConn.ToLower.Contains("main2") Then
+                s = "Shadow Server"
+            End If
+        End If
+        If s = "" Then
+            If strConn.ToLower.Contains("uat") Then
+                s = "UAT Server"
+            End If
+        End If
+        If s = "" Then
+            If strConn.ToLower.Contains("main") Then
+                s = "Live Server"
+            End If
+        End If
+
+        GetServerName = s
+    End Function
 End Class

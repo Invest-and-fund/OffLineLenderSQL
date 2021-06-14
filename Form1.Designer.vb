@@ -153,6 +153,7 @@ Partial Class Form1
         Me.dataGridViewIndividualLenderHistoricalLoans = New System.Windows.Forms.DataGridView()
         Me.tabPageIndividualLenderOutstandingSell = New System.Windows.Forms.TabPage()
         Me.dataGridViewIndividualLenderOutstandingSell = New System.Windows.Forms.DataGridView()
+        Me.txtServerName = New System.Windows.Forms.Label()
         Me.panelIndividualLenderSummary.SuspendLayout()
         Me.panel5.SuspendLayout()
         Me.panel2.SuspendLayout()
@@ -223,7 +224,7 @@ Partial Class Form1
         Me.listBoxIndividualLenderFilter.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold)
         Me.listBoxIndividualLenderFilter.FormattingEnabled = True
         Me.listBoxIndividualLenderFilter.ItemHeight = 24
-        Me.listBoxIndividualLenderFilter.Location = New System.Drawing.Point(136, 22)
+        Me.listBoxIndividualLenderFilter.Location = New System.Drawing.Point(136, 30)
         Me.listBoxIndividualLenderFilter.Name = "listBoxIndividualLenderFilter"
         Me.listBoxIndividualLenderFilter.Size = New System.Drawing.Size(210, 24)
         Me.listBoxIndividualLenderFilter.TabIndex = 11
@@ -232,7 +233,7 @@ Partial Class Form1
         'buttonIndividualLenderFind
         '
         Me.buttonIndividualLenderFind.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold)
-        Me.buttonIndividualLenderFind.Location = New System.Drawing.Point(910, 22)
+        Me.buttonIndividualLenderFind.Location = New System.Drawing.Point(910, 30)
         Me.buttonIndividualLenderFind.Name = "buttonIndividualLenderFind"
         Me.buttonIndividualLenderFind.Size = New System.Drawing.Size(249, 38)
         Me.buttonIndividualLenderFind.TabIndex = 10
@@ -244,7 +245,7 @@ Partial Class Form1
         Me.labelIndividualFindBy.AutoSize = True
         Me.labelIndividualFindBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold)
         Me.labelIndividualFindBy.ForeColor = System.Drawing.SystemColors.AppWorkspace
-        Me.labelIndividualFindBy.Location = New System.Drawing.Point(10, 22)
+        Me.labelIndividualFindBy.Location = New System.Drawing.Point(10, 30)
         Me.labelIndividualFindBy.Name = "labelIndividualFindBy"
         Me.labelIndividualFindBy.Size = New System.Drawing.Size(104, 24)
         Me.labelIndividualFindBy.TabIndex = 8
@@ -257,7 +258,7 @@ Partial Class Form1
         Me.comboBoxIndividualLenderFindBy.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.comboBoxIndividualLenderFindBy.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.comboBoxIndividualLenderFindBy.FormattingEnabled = True
-        Me.comboBoxIndividualLenderFindBy.Location = New System.Drawing.Point(351, 22)
+        Me.comboBoxIndividualLenderFindBy.Location = New System.Drawing.Point(351, 30)
         Me.comboBoxIndividualLenderFindBy.Name = "comboBoxIndividualLenderFindBy"
         Me.comboBoxIndividualLenderFindBy.Size = New System.Drawing.Size(536, 32)
         Me.comboBoxIndividualLenderFindBy.TabIndex = 9
@@ -1811,11 +1812,22 @@ Partial Class Form1
         Me.dataGridViewIndividualLenderOutstandingSell.TabIndex = 12
         Me.dataGridViewIndividualLenderOutstandingSell.TabStop = False
         '
+        'txtServerName
+        '
+        Me.txtServerName.AutoSize = True
+        Me.txtServerName.Font = New System.Drawing.Font("Microsoft Sans Serif", 16.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtServerName.Location = New System.Drawing.Point(12, -1)
+        Me.txtServerName.Name = "txtServerName"
+        Me.txtServerName.Size = New System.Drawing.Size(143, 26)
+        Me.txtServerName.TabIndex = 22
+        Me.txtServerName.Text = "Live System"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1936, 1161)
+        Me.Controls.Add(Me.txtServerName)
         Me.Controls.Add(Me.tabControlIndividualLenderInformation)
         Me.Controls.Add(Me.panelNotes)
         Me.Controls.Add(Me.panelIndividualLenderAction)
@@ -1999,4 +2011,5 @@ Partial Class Form1
     Private WithEvents dataGridViewLenderIndividualProfileDetails As DataGridView
     Private WithEvents dataGridViewIndividualLenderTradingHistory As DataGridView
     Friend WithEvents dataGridViewLenderNotes As DataGridView
+    Friend WithEvents txtServerName As Label
 End Class

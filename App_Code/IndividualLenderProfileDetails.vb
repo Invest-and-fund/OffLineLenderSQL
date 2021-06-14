@@ -46,6 +46,7 @@ Public Class IndividualLenderProfileDetails
     Public Shared _ListOfIndividualLendersByLastNameFirstNameUid As EnumerableRowCollection(Of String)
     Public Shared _ListOfIndividualLendersByFirstNameLastNameUid As EnumerableRowCollection(Of String)
     Public Shared _ListOfIndividualLendersByUidLastNameFirstName As EnumerableRowCollection(Of String)
+    Public Shared _ListOfIndividualLendersByUIDCompanyName As EnumerableRowCollection(Of String)
     Public Shared _ListOfIndividualLendersByAccountId As EnumerableRowCollection(Of String)
     Public Shared _ListOfIndividualLendersAccountId As EnumerableRowCollection(Of String)
     Public Shared _IndividualLenderFilterNames As Dictionary(Of String, String)
@@ -155,13 +156,13 @@ Public Class IndividualLenderProfileDetails
    , '-'           , Trim(Replace (Replace(u.lastname, ',', ' '), '-', ' '))    
    , '-'           , a.accountid )   )                                     
    AS FirstNameLastNameUid,   u.IsActive,      u.UserType,      
-   COALESCE(u.companyname, u.companynumber),      u.companynumber,        
+   ( Concat( trim(COALESCE(u.companyname, u.companynumber)), '-' ,u.userid )) as companyname,       u.companynumber,        
    u.individorg,      u.isactive,         u.profclient,        
    u.activated,    Trim(u.lastname)                                     
    AS LastName,         Trim(u.firstname)                                    
    AS FirstName  FROM   users u         INNER JOIN accounts a              
    ON u.userid = a.userid  WHERE  ( ( u.usertype = 0 )          
-            AND ( u.activated_bank = 5 )     
+           AND ( a.activated_bank = 5 )     
    AND ( u.activated = 5 )           AND ( u.isactive = 0 )         
    AND ( u.userid IS NOT NULL )           AND ( a.accountid IS NOT NULL )     
    AND ( u.lastname IS NOT NULL )           AND ( u.firstname IS NOT NULL )     
@@ -182,6 +183,10 @@ Public Class IndividualLenderProfileDetails
                 Case STR_LenderFindByText_AccountId
                     Dim t4 = Task.Run(Function() strSqlIndividualLenderSearchList.Append(String.Format("ORDER  BY a.{0}  {1} ", selectedFilterByUser.Replace(" ", String.Empty), Environment.NewLine)))
                     t4.Wait()
+
+                Case STR_LenderFindByText_CompanyName
+                    Dim t5 = Task.Run(Function() strSqlIndividualLenderSearchList.Append(String.Format("and u.userid = a.accountid and u.individorg = 0 ORDER  BY u.{0}  {1} ", selectedFilterByUser.Replace(" ", String.Empty), Environment.NewLine)))
+                    t5.Wait()
             End Select
 
 
@@ -209,40 +214,54 @@ Public Class IndividualLenderProfileDetails
 
                 End Try
             End Using
+            Dim dtcount As Integer
+            dtcount = ds.Tables(0).Rows.Count
+
 
             Dim t As Task(Of EnumerableRowCollection(Of DataRow)) = Nothing
             Dim selectedFilterByUserColumnName As String = selectedFilterByUser.Replace(" ", String.Empty)
 
-            Select Case selectedFilterByUser
-                Case STR_LenderFindByText_UserID
-                    t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
-                                                                                          ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
-                                                                                          Return ds.Tables(0).AsEnumerable()
-                                                                                      End Function)
-                Case STR_LenderFindByText_LastName
-                    t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
-                                                                                          ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
-                                                                                          Return ds.Tables(0).AsEnumerable()
-                                                                                      End Function)
-                Case STR_LenderFindByText_FirstName
-                    t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
-                                                                                          ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
-                                                                                          Return ds.Tables(0).AsEnumerable()
-                                                                                      End Function)
-                Case STR_LenderFindByText_AccountId
-                    t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
-                                                                                          ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
-                                                                                          Return ds.Tables(0).AsEnumerable()
-                                                                                      End Function)
-            End Select
+            t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
+                                                                                  ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
+                                                                                  Return ds.Tables(0).AsEnumerable()
+                                                                              End Function)
 
+            'Select Case selectedFilterByUser
+            '    Case STR_LenderFindByText_UserID
+            '        t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
+            '                                                                              ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
+            '                                                                              Return ds.Tables(0).AsEnumerable()
+            '                                                                          End Function)
+            '    Case STR_LenderFindByText_LastName
+            '        t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
+            '                                                                              ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
+            '                                                                              Return ds.Tables(0).AsEnumerable()
+            '                                                                          End Function)
+            '    Case STR_LenderFindByText_FirstName
+            '        t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
+            '                                                                              ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
+            '                                                                              Return ds.Tables(0).AsEnumerable()
+            '                                                                          End Function)
+            '    Case STR_LenderFindByText_AccountId
+            '        t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
+            '                                                                              ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
+            '                                                                              Return ds.Tables(0).AsEnumerable()
+            '                                                                          End Function)
+            '    Case STR_LenderFindByText_CompanyName
+            '        t = Task(Of EnumerableRowCollection(Of DataRow)).Factory.StartNew(Function()
+            '                                                                              ds.Tables(0).DefaultView.Sort = selectedFilterByUserColumnName
+            '                                                                              Return ds.Tables(0).AsEnumerable()
+            '                                                                          End Function)
+            'End Select
 
+            _ListOfIndividualLendersByUIDCompanyName = From lend In t.Result Select lend.Field(Of String)("CompanyName")
             _ListOfIndividualLendersByLastNameFirstNameUid = From lend In t.Result Select lend.Field(Of String)("LastNameFirstNameUid")
             _ListOfIndividualLendersByFirstNameLastNameUid = From lend In t.Result Select lend.Field(Of String)("FirstNameLastNameUid")
             _ListOfIndividualLendersByUidLastNameFirstName = From lend In t.Result Select lend.Field(Of String)("UidLastNameFirstName")
             ' _ListOfIndividualLendersByAccountId = From lend In t.Result Order By lend.Field(Of Integer)("AccountID") Select (lend.Field(Of String)("AccountIdLastNameFirstNameUId"))
             _ListOfIndividualLendersByAccountId = From lend In t.Result Select lend.Field(Of String)("AccountIdLastNameFirstNameUId")
             _ListOfIndividualLendersAccountId = From lend In t.Result Order By lend.Field(Of Integer)("AccountID") Where lend.Field(Of Integer)("userid") = IndividualLenderProfileDetails._LenderUserId Select (lend.Field(Of String)("AccountIdAccountRef"))
+
         Catch ex As Exception
 
             If ex.Message.Equals("Exception in GetDataReader Method") Then
@@ -280,6 +299,8 @@ Public Class IndividualLenderProfileDetails
         t2.Wait()
         Dim t3 = Task.Run(Sub() _IndividualLenderFilterNames.Add("Account ID", "ACCOUNTS.userid"))
         t3.Wait()
+        Dim t4 = Task.Run(Sub() _IndividualLenderFilterNames.Add("Company Name", "USERS.Companyname"))
+        t4.Wait()
     End Function
 
     Public Shared Function GetIndividualLenderSearchValue(ByVal strSearchValue As String, ByVal individualLenderFilter As String) As String

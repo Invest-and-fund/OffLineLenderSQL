@@ -7,7 +7,7 @@ Imports System.Linq
 Imports System.Text
 Imports System.Threading
 Imports System.Threading.Tasks
-Imports gendb
+
 
 Public Class Form1
     Public SearchID As Integer
@@ -90,6 +90,7 @@ Public Class Form1
         PopulateIndividualLenderFilterBy()
 
         WindowState = FormWindowState.Maximized
+        txtServerName.Text = GetServerName()
         Cursor = Cursors.Default
     End Sub
     Private Sub PopulateIndividualLenderFilterBy()
@@ -115,6 +116,8 @@ Public Class Form1
                 comboBoxIndividualLenderFindBy.Items.AddRange(IndividualLenderProfileDetails._ListOfIndividualLendersByFirstNameLastNameUid.ToArray())
             Case STR_LenderFindByText_AccountId
                 comboBoxIndividualLenderFindBy.Items.AddRange(IndividualLenderProfileDetails._ListOfIndividualLendersByAccountId.ToArray())
+            Case STR_LenderFindByText_CompanyName
+                comboBoxIndividualLenderFindBy.Items.AddRange(IndividualLenderProfileDetails._ListOfIndividualLendersByUIDCompanyName.ToArray())
         End Select
 
         Dim cmbAutoStringList As AutoCompleteStringCollection = New AutoCompleteStringCollection()
@@ -259,6 +262,9 @@ Public Class Form1
             Case "Account ID"
                 selectby = "ACCOUNTS.accountId"
                 individualLenderSelected = individualLenderSelected.Substring(0, individualLenderSelected.IndexOf("-"))
+            Case "Company Name"
+                selectby = "Users.userId"
+                individualLenderSelected = individualLenderSelected.Substring(individualLenderSelected.LastIndexOf("-") + 1, individualLenderSelected.Length - individualLenderSelected.LastIndexOf("-") - 1)
         End Select
 
 
@@ -860,9 +866,45 @@ Public Class Form1
     Private Sub buttonIndividualLenderProfileDetailBankSortCodeEncrypt_MouseLeave(sender As Object, e As EventArgs) Handles buttonIndividualLenderProfileDetailBankSortCodeEncrypt.MouseLeave
         Cursor = Cursors.Default
     End Sub
+    Public Function GetServerName() As String
+        Dim s, strConn As String
 
+        strConn = System.Configuration.ConfigurationManager.ConnectionStrings("SQLConnectionString").ConnectionString 'System.Configuration.ConfigurationManager.ConnectionStrings("FBConnectionString").ConnectionString.ToUpper
+        strConn = strConn.ToLower()
+        s = ""
+        If strConn.ToLower.Contains("testing") Then
+            s = "Testing Server"
+        End If
 
-    Private Sub CheckBoxPinned_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBoxPinned.CheckedChanged
+        If s = "" Then
+            If strConn.ToLower.Contains("dev") Then
+                s = "Dev Server"
+            End If
+        End If
 
-    End Sub
+        If s = "" Then
+            If strConn.ToLower.Contains("finaltest") Then
+                s = "User Acceptance Server"
+            End If
+        End If
+
+        If s = "" Then
+            If strConn.ToLower.Contains("shadow") Then
+                s = "Shadow Server"
+            End If
+        End If
+        If s = "" Then
+            If strConn.ToLower.Contains("uat") Then
+                s = "UAT Server"
+            End If
+        End If
+        If s = "" Then
+            If strConn.ToLower.Contains("main") Then
+                s = "Live Server"
+            End If
+        End If
+
+        GetServerName = s
+    End Function
+
 End Class
