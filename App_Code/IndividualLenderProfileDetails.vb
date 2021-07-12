@@ -374,7 +374,7 @@ Public Class IndividualLenderProfileDetails
 
         Try
 
-                If Not String.IsNullOrWhiteSpace(searchBySqlField) AndAlso Not String.IsNullOrWhiteSpace(searchValueFromSelectedByUser) Then
+            If Not String.IsNullOrWhiteSpace(searchBySqlField) AndAlso Not String.IsNullOrWhiteSpace(searchValueFromSelectedByUser) Then
                 strIndividualLenderProfileData.Append($"                  SELECT   USERS.USERID  as USERS_USERID,  
                             USERS.ISACTIVE as USERS_ISACTIVE,  
                               CASE WHEN USERS.CREATEDBY IS NOT NULL THEN CONVERT(VARCHAR(100), USERS.CREATEDBY)  
@@ -419,7 +419,7 @@ Public Class IndividualLenderProfileDetails
                               ELSE 'N/A'  
                               END AS USERS_EMAIL,  
 							  USERS.ACTIVATED  AS USERS_ACTIVATED,  
-                              CASE WHEN USERS.ACTIVATED_BANK IS NOT NULL THEN  CONVERT(VARCHAR(100), USERS.ACTIVATED_BANK )  
+                              CASE WHEN accounts.ACTIVATED_BANK IS NOT NULL THEN  CONVERT(VARCHAR(100), accounts.ACTIVATED_BANK )  
                               ELSE 'N/A'  
                               END AS USERS_ACTIVATED_BANK,  
                               USERS.ACTIVATIONDATE   AS USERS_ACTIVATIONDATE,  
@@ -491,14 +491,14 @@ Public Class IndividualLenderProfileDetails
                                    END  
                                END AS LENDERTYPE  {Environment.NewLine}")
                 strIndividualLenderProfileData.Append($"FROM   accounts {Environment.NewLine}")
-                    strIndividualLenderProfileData.Append($"       RIGHT OUTER JOIN users {Environment.NewLine}")
-                    strIndividualLenderProfileData.Append($"                     ON ( accounts.userid = users.userid ) {Environment.NewLine}")
-                    strIndividualLenderProfileData.Append($"WHERE  ( ( users.usertype = 0 ) {Environment.NewLine}")
-                    strIndividualLenderProfileData.Append($"         AND ( users.activated = 5 ) {Environment.NewLine}")
-                    strIndividualLenderProfileData.Append($"         AND ( users.activated_bank = 5 ) {Environment.NewLine}")
-                    strIndividualLenderProfileData.Append($"         AND ( users.isactive = 0 ) {Environment.NewLine}")
-                    strIndividualLenderProfileData.Append($"         AND {searchBySqlField} = {searchValueFromSelectedByUser} ) {Environment.NewLine}")
-                    strIndividualLenderProfileData.Append($"ORDER  BY users.userid")
+                strIndividualLenderProfileData.Append($"       RIGHT OUTER JOIN users {Environment.NewLine}")
+                strIndividualLenderProfileData.Append($"                     ON ( accounts.userid = users.userid ) {Environment.NewLine}")
+                strIndividualLenderProfileData.Append($"WHERE  ( {searchBySqlField} = {searchValueFromSelectedByUser} ) {Environment.NewLine}")
+                'strIndividualLenderProfileData.Append($"         AND ( users.activated = 5 ) {Environment.NewLine}")
+                'strIndividualLenderProfileData.Append($"         AND ( users.activated_bank = 5 ) {Environment.NewLine}")
+                'strIndividualLenderProfileData.Append($"         AND ( users.isactive = 0 ) {Environment.NewLine}")
+                'strIndividualLenderProfileData.Append($"         AND {searchBySqlField} = {searchValueFromSelectedByUser} ) {Environment.NewLine}")
+                strIndividualLenderProfileData.Append($"ORDER  BY users.userid")
 
 
 
@@ -553,7 +553,7 @@ Public Class IndividualLenderProfileDetails
 
 
                 _LenderType = result.Rows(0)("LENDERTYPE").ToString().Trim()
-                _LenderCategory = result.Rows(0)("CLIENT_CATEGORISATION").ToString().Trim()
+                    _LenderCategory = result.Rows(0)("CLIENT_CATEGORISATION").ToString().Trim()
                     _LenderActivationType = result.Rows(0)("USERS_ACTIVATED").ToString().Trim()
                     _LenderActivatedCert = result.Rows(0)("USERS_ACTIVATED_CERT").ToString().Trim()
                     _LenderBankActivationType = result.Rows(0)("USERS_ACTIVATED_BANK").ToString().Trim()
@@ -571,8 +571,8 @@ Public Class IndividualLenderProfileDetails
                     _LenderAccountReference = GenDB.GetInvestorRef(_LenderSeqAlpha, Convert.ToInt32(_LenderAccountId))
                     _LenderEmailAddress = result.Rows(0)("USERS_EMAIL").ToString()
                     _LenderPhoneNumber = result.Rows(0)("USERS_TELEPHONE").ToString()
-                ' GetFirstEmailSent(_LenderEmailAddress)   '**************** Check Later
-                _LenderBankAccountName = result.Rows(0)("ACCOUNTS_BANKACCNAME").ToString()
+                    ' GetFirstEmailSent(_LenderEmailAddress)   '**************** Check Later
+                    _LenderBankAccountName = result.Rows(0)("ACCOUNTS_BANKACCNAME").ToString()
                     _LenderBankAccountNumber = result.Rows(0)("ACCOUNTS_BANKACCNUMBER").ToString()
                     _LenderBankSortCode = result.Rows(0)("ACCOUNTS_BANKACCSORTCODE").ToString()
                     _LenderBuildingSocietyRollNum = result.Rows(0)("ACCOUNTS_BUILDSOCROLLNUMBER").ToString()
@@ -594,13 +594,13 @@ Public Class IndividualLenderProfileDetails
         Catch ex As Exception
 
             Throw
-            Finally
+        Finally
 
 
             strIndividualLenderProfileData.Length = 0
-            End Try
+        End Try
 
-            Return result
+        Return result
 
     End Function
 
@@ -791,42 +791,42 @@ Public Class IndividualLenderProfileDetails
 
         Dim strSqlIndividualLenderCategorisationHistory As StringBuilder = New StringBuilder()
 
-            Try
+        Try
 
-                If Not String.IsNullOrWhiteSpace(accountIdSelectedByUser) Then
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("SELECT * From (SELECT  {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("CASE WHEN USERS.CLIENT_CATEGORISATION IS NOT NULL THEN {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("           CASE USERS.CLIENT_CATEGORISATION WHEN 0 THEN 'Uninitialized' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 1 THEN 'Elective Professional' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 2 THEN 'Self Certified Sophisticated' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 3 THEN 'High Networth Individual' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 4 THEN 'Per Se Professional' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 5 THEN 'Eligible counterparty' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 9 THEN 'Awaiting Signoff' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("           END {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("       ELSE 'Uninitialized' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("       END AS CLIENT_CATEGORISATION, {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("        CASE WHEN CLIENT_CATEGORISATION_DATE IS NOT NULL THEN CLIENT_CATEGORISATION_DATE ELSE 'N/A' END as CLIENT_CATEGORISATION_DATE {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("FROM   USERS {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("WHERE  ( USERS.USERID = @I_ACCOUNT_ID ) {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format(" {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("UNION ALL {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format(" {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("SELECT  {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("CASE WHEN NEW_USERS_HISTORY.CLIENT_CATEGORISATION IS NOT NULL THEN {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("           CASE NEW_USERS_HISTORY.CLIENT_CATEGORISATION WHEN 0 THEN 'Uninitialized' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 1 THEN 'Elective Professional' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 2 THEN 'Self Certified Sophisticated' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 3 THEN 'High Networth Individual' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 4 THEN 'Per Se Professional' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 5 THEN 'Eligible counterparty' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 9 THEN 'Awaiting Signoff' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("           END {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("       ELSE 'Uninitialized' {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("       END AS CLIENT_CATEGORISATION, {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("        CASE WHEN CLIENT_CATEGORISATION_DATE IS NOT NULL THEN CLIENT_CATEGORISATION_DATE ELSE 'N/A' END as CLIENT_CATEGORISATION_DATE {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append(String.Format("FROM   NEW_USERS_HISTORY {0}", Environment.NewLine))
-                    strSqlIndividualLenderCategorisationHistory.Append("WHERE  ( NEW_USERS_HISTORY.USERID =@I_ACCOUNT_ID )) ORDER BY  CLIENT_CATEGORISATION_DATE DESC ")
+            If Not String.IsNullOrWhiteSpace(accountIdSelectedByUser) Then
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("SELECT * From (SELECT  {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("CASE WHEN USERS.CLIENT_CATEGORISATION IS NOT NULL THEN {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("           CASE USERS.CLIENT_CATEGORISATION WHEN 0 THEN 'Uninitialized' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 1 THEN 'Elective Professional' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 2 THEN 'Self Certified Sophisticated' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 3 THEN 'High Networth Individual' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 4 THEN 'Per Se Professional' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 5 THEN 'Eligible counterparty' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 9 THEN 'Awaiting Signoff' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("           END {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("       ELSE 'Uninitialized' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("       END AS CLIENT_CATEGORISATION, {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("        CASE WHEN CLIENT_CATEGORISATION_DATE IS NOT NULL THEN CLIENT_CATEGORISATION_DATE ELSE 'N/A' END as CLIENT_CATEGORISATION_DATE {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("FROM   USERS {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("WHERE  ( USERS.USERID = @I_ACCOUNT_ID ) {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format(" {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("UNION ALL {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format(" {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("SELECT  {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("CASE WHEN NEW_USERS_HISTORY.CLIENT_CATEGORISATION IS NOT NULL THEN {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("           CASE NEW_USERS_HISTORY.CLIENT_CATEGORISATION WHEN 0 THEN 'Uninitialized' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 1 THEN 'Elective Professional' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 2 THEN 'Self Certified Sophisticated' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 3 THEN 'High Networth Individual' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 4 THEN 'Per Se Professional' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 5 THEN 'Eligible counterparty' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("             WHEN 9 THEN 'Awaiting Signoff' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("           END {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("       ELSE 'Uninitialized' {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("       END AS CLIENT_CATEGORISATION, {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("        CASE WHEN CLIENT_CATEGORISATION_DATE IS NOT NULL THEN CLIENT_CATEGORISATION_DATE ELSE 'N/A' END as CLIENT_CATEGORISATION_DATE {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append(String.Format("FROM   NEW_USERS_HISTORY {0}", Environment.NewLine))
+                strSqlIndividualLenderCategorisationHistory.Append("WHERE  ( NEW_USERS_HISTORY.USERID =@I_ACCOUNT_ID )) ORDER BY  CLIENT_CATEGORISATION_DATE DESC ")
 
                 Dim sSQL As String
                 Dim sErrorStr As String = ""
@@ -857,24 +857,24 @@ Public Class IndividualLenderProfileDetails
                 End Using
 
                 result.DefaultView.Sort = "CLIENT_CATEGORISATION_DATE"
-                    _IndividualLenderCategorisationHistoryHasRows = False
+                _IndividualLenderCategorisationHistoryHasRows = False
 
-                    If result.Rows.Count > 0 Then
-                        _IndividualLenderCategorisationHistoryHasRows = True
-                    End If
-                Else
-                    result = Nothing
+                If result.Rows.Count > 0 Then
+                    _IndividualLenderCategorisationHistoryHasRows = True
                 End If
+            Else
+                result = Nothing
+            End If
 
         Catch ex As Exception
 
             Throw
-            Finally
+        Finally
 
 
 
             strSqlIndividualLenderCategorisationHistory.Length = 0
-            End Try
+        End Try
 
 
     End Function

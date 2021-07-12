@@ -1227,6 +1227,8 @@ Public Class GenDB
                 s = "IandF Account money to a user's account"
             Case 1003
                 s = "IandF Account money transfer from user for withdrawal"
+            Case 1024
+                s = "HE Funds Transfer"
             Case 1100
                 s = "Account deposit" ' -  Investor from outside world i.e. from IandF Account (Cr) - 1002"
             Case 1101

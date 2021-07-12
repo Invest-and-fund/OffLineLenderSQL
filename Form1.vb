@@ -258,7 +258,8 @@ Public Class Form1
                 individualLenderSelected = individualLenderSelected.Substring(individualLenderSelected.LastIndexOf("-") + 1, individualLenderSelected.Length - individualLenderSelected.LastIndexOf("-") - 1)
             Case "User ID"
                 selectby = "Users.userId"
-                individualLenderSelected = individualLenderSelected.Substring(individualLenderSelected.LastIndexOf("-") + 1, individualLenderSelected.Length - individualLenderSelected.LastIndexOf("-") - 1)
+                ' individualLenderSelected = individualLenderSelected.Substring(individualLenderSelected.LastIndexOf("-") + 1, individualLenderSelected.Length - individualLenderSelected.LastIndexOf("-") - 1)
+                individualLenderSelected = individualLenderSelected.Substring(0, individualLenderSelected.IndexOf("-"))
             Case "Account ID"
                 selectby = "ACCOUNTS.accountId"
                 individualLenderSelected = individualLenderSelected.Substring(0, individualLenderSelected.IndexOf("-"))

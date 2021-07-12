@@ -80,7 +80,7 @@ Public Class IndividualLenderFinancialTransactions
         Dim fAmount As Double = 0
         Dim strAmount As String = Nothing
         Dim strActualBalance As String = Nothing
-        Dim intNegativeTransTypes As Integer() = {1001, 1002, 1102, 1103, 1200, 1204, 1206, 1209, 1212, 1214, 1300, 1302, 1304, 1306, 1401, 1402, 1405, 1406, 1408, 1410, 1412}
+        Dim intNegativeTransTypes As Integer() = {1001, 1002, 1024, 1102, 1103, 1200, 1204, 1206, 1209, 1212, 1214, 1300, 1302, 1304, 1306, 1401, 1402, 1405, 1406, 1408, 1410, 1412}
 
 
 
@@ -101,8 +101,9 @@ Public Class IndividualLenderFinancialTransactions
                              (ft.balance_available) AS TheBalance1,  
                              (ft.balance_actual)    AS TheActualBalance1,  
                             bidid,  
-                            o.loanid,  
-                            o.lh_id  
+                             
+                            o.lh_id,
+							coalesce (o.loanid, lc.loanid) as loanid
                      FROM   fin_trans ft  
                             LEFT OUTER JOIN fin_bals fb  
                                          ON ft.fin_transid = fb.fin_transid  
@@ -114,8 +115,10 @@ Public Class IndividualLenderFinancialTransactions
                                          ON ln.loanid = o.loanid  
                             LEFT OUTER JOIN bids bd  
                                          ON bd.orderid = o.orderid  
-                            LEFT OUTER JOIN lh_id_loan lh  
-                                         ON lh.lh_id = o.lh_id  
+                            LEFT OUTER JOIN lh_id_loan lh   
+                                         ON lh.lh_id = o.lh_id 
+							LEFT OUTER JOIN LOANCO_LH_BALS lC 
+                                         ON lc.ACCOUNTID = ft.accountid and ft.amount = lc.amount  
                      WHERE  ft.accountid = @I_ACCOUNT_ID 
                             AND ft.isactive = 0  
                             AND ft.transtype NOT IN ( 1200, 1201, 1203, 1204,  
