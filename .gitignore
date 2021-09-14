@@ -9,3 +9,4 @@
 /.vs/OffLineLender2/v16
 .vs/
 *.suo
+/obj/Debug

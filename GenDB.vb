@@ -1228,7 +1228,9 @@ Public Class GenDB
             Case 1003
                 s = "IandF Account money transfer from user for withdrawal"
             Case 1024
-                s = "HE Funds Transfer"
+                s = "HE Funds Transfer in"
+            Case 1025
+                s = "HE Funds Transfer in"
             Case 1100
                 s = "Account deposit" ' -  Investor from outside world i.e. from IandF Account (Cr) - 1002"
             Case 1101
@@ -1271,6 +1273,14 @@ Public Class GenDB
                 s = "M IandF receives investor facility Fee (Cr)"
             Case 1308
                 s = "Interest Purchased" ' - M Investor purchased (Dr)"
+            Case 1310
+                s = "HE Funds Transfer out" ' - M b"
+            Case 1311
+                s = "HE Funds Transfer out" ' - M b)"
+            Case 1312
+                s = "HE Interest Funds Transfer out" ' - M b"
+            Case 1313
+                s = "HE Interest Funds Transfer out" ' - M b)"
             Case 1400
                 s = "Sell of " 'xxxxx - M Secondary sell seller (Cr)"
             Case 1401
@@ -1288,13 +1298,17 @@ Public Class GenDB
             Case 1407
                 s = "Transaction Fee" ' from  xxxxx - M Secondary IandF receives transaction fee from buyer (Cr)"
             Case 1408
-                s = "Accrued interest" ' - M Secondary buyer pays accrued interest to seller (Dr)"
+                s = "Purchased interest" ' - M Secondary buyer pays accrued interest to seller (Dr)"
             Case 1409
-                s = "Accrued interest" ' - M Secondary seller receives accrued interest from buyer (Cr)"
+                s = "Purchased interest" ' - M Secondary seller receives accrued interest from buyer (Cr)"
             Case 1410
                 s = "Interest" ' - M Secondary seller receives accrued interest from buyer (Cr)"
             Case 1411
                 s = "Interest" ' - M Secondary seller receives accrued interest from buyer (Cr)"
+            Case 1412
+                s = "Accrued Interest" ' - M Secondary seller receives accrued interest from buyer (Cr)"
+            Case 1413
+                s = "Accrued Interest" ' - M Secondary seller receives accrued interest from buyer (Cr)"
             Case 2304
                 s = "Facility fee adjustment"
             Case 2305

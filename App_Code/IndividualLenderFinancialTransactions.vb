@@ -95,7 +95,7 @@ Public Class IndividualLenderFinancialTransactions
                             ft.transtype,  
                             ft.header_id,  
                             ft.orderid           AS ftorderid,  
-                            Trim(ln.business_name)     AS LoanDesc,  
+                            coalesce (Trim(ln.business_name) , Trim(ln1.business_name) )    AS LoanDesc,  
                             Trim(lh.business_name)     AS LoanDesc2,  
                              (ft.amount)            AS amount1,  
                              (ft.balance_available) AS TheBalance1,  
@@ -104,6 +104,8 @@ Public Class IndividualLenderFinancialTransactions
                              
                             o.lh_id,
 							coalesce (o.loanid, lc.loanid) as loanid
+							, lc.LOANID as lcloanid
+							,ft.accountid
                      FROM   fin_trans ft  
                             LEFT OUTER JOIN fin_bals fb  
                                          ON ft.fin_transid = fb.fin_transid  
@@ -118,11 +120,13 @@ Public Class IndividualLenderFinancialTransactions
                             LEFT OUTER JOIN lh_id_loan lh   
                                          ON lh.lh_id = o.lh_id 
 							LEFT OUTER JOIN LOANCO_LH_BALS lC 
-                                         ON lc.ACCOUNTID = ft.accountid and ft.amount = lc.amount  
-                     WHERE  ft.accountid = @I_ACCOUNT_ID 
+                                         ON  ft.amount = lc.amount  and FORMAT(ft.datecreated, 'yyyy-MM-dd HH') = FORMAT(lc.datecreated, 'yyyy-MM-dd HH')
+							LEFT OUTER JOIN loans ln1  
+                                         ON ln1.loanid = lc.loanid
+                     WHERE  ft.accountid = 3711
                             AND ft.isactive = 0  
                             AND ft.transtype NOT IN ( 1200, 1201, 1203, 1204,  
-                                                      1211, 1212, 1213, 1214 ) "
+                                                      1211, 1212, 1213, 1214 )"
 
 
             ''''''''''''''Need to check
