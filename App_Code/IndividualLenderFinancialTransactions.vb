@@ -16,7 +16,7 @@ Public Class IndividualLenderFinancialTransactions
 
 
     Public Shared Function GetLoanName(ByVal dr As DataRow) As String
-        Dim arr1ToGetLoanDesc As Integer() = {1101, 1103, 1200, 1201, 1205, 1206, 1207, 1208, 1209, 1210, 1300, 1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308}
+        Dim arr1ToGetLoanDesc As Integer() = {1024, 1101, 1103, 1200, 1201, 1205, 1206, 1207, 1208, 1209, 1210, 1300, 1301, 1302, 1303, 1304, 1305, 1306, 1307, 1308, 1310, 1311, 1312, 1313}
         Dim arr2ToGetLoanDescPlusBidId As Integer() = {1211, 1212, 1213, 1214}
         Dim arr3ToGetLoanDescPlusFTOrderId As Integer() = {1400, 1401, 1402, 1403, 1404, 1405, 1406, 1407, 1408, 1409, 1410, 1411, 1412, 1413}
         Dim arr4ToGetEmptyLoanDesc As Integer() = {1100, 1102}
@@ -80,7 +80,7 @@ Public Class IndividualLenderFinancialTransactions
         Dim fAmount As Double = 0
         Dim strAmount As String = Nothing
         Dim strActualBalance As String = Nothing
-        Dim intNegativeTransTypes As Integer() = {1001, 1002, 1024, 1102, 1103, 1200, 1204, 1206, 1209, 1212, 1214, 1300, 1302, 1304, 1306, 1401, 1402, 1405, 1406, 1408, 1410, 1412}
+        Dim intNegativeTransTypes As Integer() = {1001, 1002, 1024, 1102, 1103, 1200, 1204, 1206, 1209, 1212, 1214, 1300, 1302, 1304, 1306, 1310, 1312, 1401, 1402, 1405, 1406, 1408, 1410, 1412}
 
 
 
@@ -123,7 +123,7 @@ Public Class IndividualLenderFinancialTransactions
                                          ON  ft.amount = lc.amount  and FORMAT(ft.datecreated, 'yyyy-MM-dd HH') = FORMAT(lc.datecreated, 'yyyy-MM-dd HH')
 							LEFT OUTER JOIN loans ln1  
                                          ON ln1.loanid = lc.loanid
-                     WHERE  ft.accountid = 3711
+                     WHERE  ft.accountid = @I_ACCOUNT_ID
                             AND ft.isactive = 0  
                             AND ft.transtype NOT IN ( 1200, 1201, 1203, 1204,  
                                                       1211, 1212, 1213, 1214 )"
@@ -195,6 +195,7 @@ Public Class IndividualLenderFinancialTransactions
                     Dim drCurrentRow = table.Rows(i)
                     dr = drCurrentRow
                     intTransType = GenDB.fnDBIntField(dr("TransType"))
+
                     strLoanName = GetLoanName(dr)
                     intAmount = GenDB.fnDBIntField(dr("amount1"))
                     intActualBalance = GenDB.fnDBIntField(dr("TheActualBalance1"))
@@ -220,7 +221,7 @@ Public Class IndividualLenderFinancialTransactions
                     If (intTransType <> 1100) And (intTransType <> 1102) Then
 
                         If String.IsNullOrEmpty(strLoanName) Then
-                            strLoanName = strLastDesc
+                            ' strLoanName = strLastDesc
                         End If
                     End If
 
