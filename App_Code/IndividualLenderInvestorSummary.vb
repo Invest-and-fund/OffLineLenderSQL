@@ -29,7 +29,6 @@ Public Class IndividualLenderInvestorSummary
     Public Shared _LenderNO_ACTIVE_INVESTMENTS As String
     Public Shared _LenderTRANSACTION_FEES_TOTALL As String
 
-
     Public Shared Function GetIndividualLenderIS(ByVal AccountID As String, ByVal UserID As String)
 
         Dim FlagReturn As Boolean

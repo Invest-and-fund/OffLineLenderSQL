@@ -105,7 +105,6 @@
     <Compile Include="App_Code\IndividualLenderFinancialTransactions.vb" />
     <Compile Include="App_Code\IndividualLenderHistoricalLoans.vb" />
     <Compile Include="App_Code\IndividualLenderInvestorSummary.vb" />
-    <Compile Include="App_Code\IndividualLenderMandates.vb" />
     <Compile Include="App_Code\IndividualLenderOutstandingSell.vb" />
     <Compile Include="App_Code\IndividualLenderProfileDetails.vb" />
     <Compile Include="App_Code\IndividualLenderProfileDetailsvb.vb" />

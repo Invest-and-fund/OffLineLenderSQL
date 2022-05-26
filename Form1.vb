@@ -19,7 +19,6 @@ Public Class Form1
     Private Const STR_TabText_CurrentLoans As String = "Current Loans"
     Private Const STR_TabText_HistoricalLoans As String = "Historical Loans"
     Private Const STR_TabText_OutstandingSell As String = "Outstanding Sell"
-    Private Const STR_TabText_MandateBalances As String = "Mandate Balances"
     Public Const STR_LenderFindByText_UserID As String = "User ID"
     Public Const STR_LenderFindByText_LastName As String = "Last Name"
     Public Const STR_LenderFindByText_FirstName As String = "First Name"
@@ -208,17 +207,6 @@ Public Class Form1
             dataGridViewIndividualLenderOutstandingSell.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
         Else
             dataGridViewIndividualLenderOutstandingSell.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
-        End If
-
-
-        ' Mandate Blances
-
-        Dim mbCounts As Integer = PopulateIndividualLenderMandateBalances(IndividualLenderProfileDetails._LenderAccountId)
-
-        If mbCounts >= 1 Then
-            dataGridViewIndividualLenderMandateBalances.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells
-        Else
-            dataGridViewIndividualLenderMandateBalances.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader
         End If
 
         ' Notes
@@ -549,84 +537,7 @@ Public Class Form1
         Return outputValue
     End Function
 
-    Public Function PopulateIndividualLenderMandateBalances(ByVal searchValueFromSelectedByUser As String)
-        Dim outputValue As Integer = -1
-        txtCurrentConcentration.Text = GenDB.PenceToCurrencyStringPounds(IndividualLenderInvestorSummary._LenderTotalFundBalance)
-        dataGridViewIndividualLenderOutstandingSell.DataSource = IndividualLenderOutstandingSell.GetIndividualLenderOutstandingSell(searchValueFromSelectedByUser)
 
-        dataGridViewIndividualLenderOutstandingSell.AutoResizeColumns()
-
-        If dataGridViewIndividualLenderOutstandingSell.RowCount > -1 Then
-            FormatDataGridViewToDecimal(dataGridViewIndividualLenderOutstandingSell, "NEW_RATE")
-            dataGridViewIndividualLenderOutstandingSell.AutoGenerateColumns = True
-            dataGridViewIndividualLenderOutstandingSell.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-            outputValue = dataGridViewIndividualLenderOutstandingSell.RowCount
-            FormatDataGridViewToBritishMonetory(dataGridViewIndividualLenderOutstandingSell, "MAX_LOAN_AMOUNT")
-            FormatDataGridViewToBritishMonetory(dataGridViewIndividualLenderOutstandingSell, "AMOUNT_FULL")
-            FormatDataGridViewToBritishMonetory(dataGridViewIndividualLenderOutstandingSell, "PREMIUM")
-            FormatDataGridViewToBritishMonetory(dataGridViewIndividualLenderOutstandingSell, "SALE_AMOUNT")
-            FormatDataGridViewToBritishMonetory(dataGridViewIndividualLenderOutstandingSell, "OUTSTANDING_AMOUNT")
-            dataGridViewIndividualLenderOutstandingSell.Columns("MAX_LOAN_AMOUNT").HeaderText = "Max Loan Name"
-            dataGridViewIndividualLenderOutstandingSell.Columns("COMPANY_NAME").HeaderText = "Company Name"
-            dataGridViewIndividualLenderOutstandingSell.Columns("DESCRIPTION").HeaderText = "Description"
-            dataGridViewIndividualLenderOutstandingSell.Columns("THE_LOAN").HeaderText = "Loan"
-            dataGridViewIndividualLenderOutstandingSell.Columns("IPO_END").HeaderText = "Ipo End"
-            dataGridViewIndividualLenderOutstandingSell.Columns("SECURITY_GURANTEES").HeaderText = "Security Gurantees"
-            dataGridViewIndividualLenderOutstandingSell.Columns("TERM").HeaderText = "Term"
-            dataGridViewIndividualLenderOutstandingSell.Columns("COMPANY_RISK_STARS").HeaderText = "Company Risk Stars"
-            dataGridViewIndividualLenderOutstandingSell.Columns("THE_ORDER").HeaderText = "Order"
-            dataGridViewIndividualLenderOutstandingSell.Columns("ACCOUNT_ID").HeaderText = "Account Id"
-            dataGridViewIndividualLenderOutstandingSell.Columns("OUTSTANDING_AMOUNT").HeaderText = "Outstanding Amount"
-            dataGridViewIndividualLenderOutstandingSell.Columns("MONTHS_LEFT").HeaderText = "Months Left"
-            dataGridViewIndividualLenderOutstandingSell.Columns("SALE_AMOUNT").HeaderText = "Sale Amount"
-            dataGridViewIndividualLenderOutstandingSell.Columns("PREMIUM_PERCENT").HeaderText = "Premium Percent"
-            dataGridViewIndividualLenderOutstandingSell.Columns("PREMIUM").HeaderText = "Premium Amount"
-            dataGridViewIndividualLenderOutstandingSell.Columns("AMOUNT_FULL").HeaderText = "Full Amount"
-            dataGridViewIndividualLenderOutstandingSell.Columns("NEW_RATE").HeaderText = "Intetest Rate"
-            dataGridViewIndividualLenderOutstandingSell.Columns("ANYTHING_ELSE").HeaderText = "Anything Else"
-            dataGridViewIndividualLenderOutstandingSell.Columns("PURPOSE_OF_LOAN").HeaderText = "Purpose of Loan"
-            dataGridViewIndividualLenderOutstandingSell.Columns("BACKGROUND").HeaderText = "Background"
-            dataGridViewIndividualLenderOutstandingSell.Columns("PEOPLE").HeaderText = "People"
-            dataGridViewIndividualLenderOutstandingSell.Columns("MAX_LOAN_AMOUNT").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("COMPANY_NAME").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("DESCRIPTION").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("THE_LOAN").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("IPO_END").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("SECURITY_GURANTEES").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("TERM").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("COMPANY_RISK_STARS").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("THE_ORDER").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("ACCOUNT_ID").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("OUTSTANDING_AMOUNT").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("MONTHS_LEFT").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("SALE_AMOUNT").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("PREMIUM_PERCENT").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("PREMIUM").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("AMOUNT_FULL").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("NEW_RATE").Visible = True
-            dataGridViewIndividualLenderOutstandingSell.Columns("ANYTHING_ELSE").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("PURPOSE_OF_LOAN").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("BACKGROUND").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("PEOPLE").Visible = False
-            dataGridViewIndividualLenderOutstandingSell.Columns("COMPANY_NAME").DisplayIndex = 0
-            dataGridViewIndividualLenderOutstandingSell.Columns("THE_LOAN").DisplayIndex = 1
-            dataGridViewIndividualLenderOutstandingSell.Columns("SALE_AMOUNT").DisplayIndex = 2
-            dataGridViewIndividualLenderOutstandingSell.Columns("OUTSTANDING_AMOUNT").DisplayIndex = 3
-            dataGridViewIndividualLenderOutstandingSell.Columns("NEW_RATE").DisplayIndex = 4
-            dataGridViewIndividualLenderOutstandingSell.Columns("PREMIUM_PERCENT").DisplayIndex = 5
-            dataGridViewIndividualLenderOutstandingSell.Columns("PREMIUM").DisplayIndex = 6
-            dataGridViewIndividualLenderOutstandingSell.Columns("AMOUNT_FULL").DisplayIndex = 7
-            dataGridViewIndividualLenderOutstandingSell.Columns("TERM").DisplayIndex = 8
-            dataGridViewIndividualLenderOutstandingSell.Columns("ACCOUNT_ID").DisplayIndex = 9
-        Else
-            outputValue = -1
-        End If
-
-        dataGridViewIndividualLenderOutstandingSell.AutoResizeColumns()
-        dataGridViewIndividualLenderOutstandingSell.[ReadOnly] = True
-
-        Return outputValue
-    End Function
     Public Function PopulateIndividualLenderOutstandingSell(ByVal searchValueFromSelectedByUser As String)
         Dim outputValue As Integer = -1
 
