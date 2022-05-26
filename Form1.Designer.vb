@@ -154,6 +154,12 @@ Partial Class Form1
         Me.tabPageIndividualLenderOutstandingSell = New System.Windows.Forms.TabPage()
         Me.dataGridViewIndividualLenderOutstandingSell = New System.Windows.Forms.DataGridView()
         Me.txtServerName = New System.Windows.Forms.Label()
+        Me.tabPageIndividualLenderMandateBalances = New System.Windows.Forms.TabPage()
+        Me.dataGridViewIndividualLenderMandateBalances = New System.Windows.Forms.DataGridView()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtCurrBalance = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtCurrentConcentration = New System.Windows.Forms.TextBox()
         Me.panelIndividualLenderSummary.SuspendLayout()
         Me.panel5.SuspendLayout()
         Me.panel2.SuspendLayout()
@@ -178,6 +184,8 @@ Partial Class Form1
         CType(Me.dataGridViewIndividualLenderHistoricalLoans, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tabPageIndividualLenderOutstandingSell.SuspendLayout()
         CType(Me.dataGridViewIndividualLenderOutstandingSell, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tabPageIndividualLenderMandateBalances.SuspendLayout()
+        CType(Me.dataGridViewIndividualLenderMandateBalances, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ContextMenuStrip1
@@ -802,6 +810,7 @@ Partial Class Form1
         Me.tabControlIndividualLenderInformation.Controls.Add(Me.tabPageIndividualLenderCurrentLoans)
         Me.tabControlIndividualLenderInformation.Controls.Add(Me.tabPageIndividualLenderHistoricalLoans)
         Me.tabControlIndividualLenderInformation.Controls.Add(Me.tabPageIndividualLenderOutstandingSell)
+        Me.tabControlIndividualLenderInformation.Controls.Add(Me.tabPageIndividualLenderMandateBalances)
         Me.tabControlIndividualLenderInformation.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.tabControlIndividualLenderInformation.ItemSize = New System.Drawing.Size(200, 34)
         Me.tabControlIndividualLenderInformation.Location = New System.Drawing.Point(519, 84)
@@ -1822,11 +1831,76 @@ Partial Class Form1
         Me.txtServerName.TabIndex = 22
         Me.txtServerName.Text = "Live System"
         '
+        'tabPageIndividualLenderMandateBalances
+        '
+        Me.tabPageIndividualLenderMandateBalances.Controls.Add(Me.txtCurrentConcentration)
+        Me.tabPageIndividualLenderMandateBalances.Controls.Add(Me.Label13)
+        Me.tabPageIndividualLenderMandateBalances.Controls.Add(Me.txtCurrBalance)
+        Me.tabPageIndividualLenderMandateBalances.Controls.Add(Me.Label1)
+        Me.tabPageIndividualLenderMandateBalances.Controls.Add(Me.dataGridViewIndividualLenderMandateBalances)
+        Me.tabPageIndividualLenderMandateBalances.Location = New System.Drawing.Point(4, 38)
+        Me.tabPageIndividualLenderMandateBalances.Name = "tabPageIndividualLenderMandateBalances"
+        Me.tabPageIndividualLenderMandateBalances.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabPageIndividualLenderMandateBalances.Size = New System.Drawing.Size(1383, 683)
+        Me.tabPageIndividualLenderMandateBalances.TabIndex = 6
+        Me.tabPageIndividualLenderMandateBalances.Text = "Mandate Balances"
+        Me.tabPageIndividualLenderMandateBalances.UseVisualStyleBackColor = True
+        '
+        'dataGridViewIndividualLenderMandateBalances
+        '
+        Me.dataGridViewIndividualLenderMandateBalances.AllowUserToAddRows = False
+        Me.dataGridViewIndividualLenderMandateBalances.AllowUserToDeleteRows = False
+        Me.dataGridViewIndividualLenderMandateBalances.AllowUserToOrderColumns = True
+        Me.dataGridViewIndividualLenderMandateBalances.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.dataGridViewIndividualLenderMandateBalances.BackgroundColor = System.Drawing.SystemColors.HotTrack
+        Me.dataGridViewIndividualLenderMandateBalances.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.dataGridViewIndividualLenderMandateBalances.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dataGridViewIndividualLenderMandateBalances.Cursor = System.Windows.Forms.Cursors.Default
+        Me.dataGridViewIndividualLenderMandateBalances.GridColor = System.Drawing.Color.Silver
+        Me.dataGridViewIndividualLenderMandateBalances.Location = New System.Drawing.Point(6, 52)
+        Me.dataGridViewIndividualLenderMandateBalances.Name = "dataGridViewIndividualLenderMandateBalances"
+        Me.dataGridViewIndividualLenderMandateBalances.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
+        Me.dataGridViewIndividualLenderMandateBalances.Size = New System.Drawing.Size(1377, 619)
+        Me.dataGridViewIndividualLenderMandateBalances.TabIndex = 13
+        Me.dataGridViewIndividualLenderMandateBalances.TabStop = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(53, 17)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(128, 20)
+        Me.Label1.TabIndex = 14
+        Me.Label1.Text = "Current Balance:"
+        '
+        'txtCurrBalance
+        '
+        Me.txtCurrBalance.Location = New System.Drawing.Point(187, 14)
+        Me.txtCurrBalance.Name = "txtCurrBalance"
+        Me.txtCurrBalance.Size = New System.Drawing.Size(163, 26)
+        Me.txtCurrBalance.TabIndex = 15
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(493, 17)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(170, 20)
+        Me.Label13.TabIndex = 16
+        Me.Label13.Text = "Current Concentration:"
+        '
+        'txtCurrentConcentration
+        '
+        Me.txtCurrentConcentration.Location = New System.Drawing.Point(669, 14)
+        Me.txtCurrentConcentration.Name = "txtCurrentConcentration"
+        Me.txtCurrentConcentration.Size = New System.Drawing.Size(163, 26)
+        Me.txtCurrentConcentration.TabIndex = 17
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1936, 1161)
+        Me.ClientSize = New System.Drawing.Size(1936, 1061)
         Me.Controls.Add(Me.txtServerName)
         Me.Controls.Add(Me.tabControlIndividualLenderInformation)
         Me.Controls.Add(Me.panelNotes)
@@ -1877,6 +1951,9 @@ Partial Class Form1
         CType(Me.dataGridViewIndividualLenderHistoricalLoans, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tabPageIndividualLenderOutstandingSell.ResumeLayout(False)
         CType(Me.dataGridViewIndividualLenderOutstandingSell, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tabPageIndividualLenderMandateBalances.ResumeLayout(False)
+        Me.tabPageIndividualLenderMandateBalances.PerformLayout()
+        CType(Me.dataGridViewIndividualLenderMandateBalances, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -2012,4 +2089,10 @@ Partial Class Form1
     Private WithEvents dataGridViewIndividualLenderTradingHistory As DataGridView
     Friend WithEvents dataGridViewLenderNotes As DataGridView
     Friend WithEvents txtServerName As Label
+    Friend WithEvents tabPageIndividualLenderMandateBalances As TabPage
+    Private WithEvents dataGridViewIndividualLenderMandateBalances As DataGridView
+    Friend WithEvents txtCurrentConcentration As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents txtCurrBalance As TextBox
+    Friend WithEvents Label1 As Label
 End Class
