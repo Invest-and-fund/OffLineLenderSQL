@@ -80,7 +80,7 @@ Public Class IndividualLenderFinancialTransactions
         Dim fAmount As Double = 0
         Dim strAmount As String = Nothing
         Dim strActualBalance As String = Nothing
-        Dim intNegativeTransTypes As Integer() = {1001, 1002, 1024, 1102, 1103, 1200, 1204, 1206, 1209, 1212, 1214, 1300, 1302, 1304, 1306, 1310, 1312, 1401, 1402, 1405, 1406, 1408, 1410, 1412}
+        Dim intNegativeTransTypes As Integer() = {1001, 1002, 1022, 1024, 1102, 1103, 1200, 1204, 1206, 1209, 1212, 1214, 1300, 1302, 1304, 1306, 1310, 1312, 1401, 1402, 1405, 1406, 1408, 1410, 1412}
 
 
 

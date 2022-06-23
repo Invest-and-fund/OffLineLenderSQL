@@ -1227,6 +1227,8 @@ Public Class GenDB
                 s = "IandF Account money to a user's account"
             Case 1003
                 s = "IandF Account money transfer from user for withdrawal"
+            Case 1022
+                s = "Move funds out to other account "
             Case 1024
                 s = "HE Funds Transfer in"
             Case 1025
